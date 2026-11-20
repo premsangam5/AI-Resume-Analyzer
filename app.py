@@ -1,6 +1,3 @@
-# 
-
-
 
 import streamlit as st
 import pymupdf
@@ -20,6 +17,7 @@ st.title("📄 AI Resume Analyzer")
 st.write("Analyze your resume and discover how well it matches a job.")
 
 st.divider()
+
 
 # -------------------------
 # SKILL DATABASE
@@ -44,6 +42,7 @@ skills_list = [
     "Docker",
     "MongoDB"
 ]
+
 
 # -------------------------
 # PDF EXTRACTION
@@ -123,7 +122,6 @@ def extract_skills(text):
 def calculate_match(resume_skills, job_skills):
 
     resume_set = {s.lower() for s in resume_skills}
-    job_set = {s.lower() for s in job_skills}
 
     matched = [
         skill for skill in job_skills
@@ -138,67 +136,9 @@ def calculate_match(resume_skills, job_skills):
     if not job_skills:
         return matched, missing, 0
 
-    score = len(matched) / len(job_skills) * 100
+    score = (len(matched) / len(job_skills)) * 100
 
     return matched, missing, score
-
-# -------------------------
-# RESUME FEEDBACK ENGINE
-# -------------------------
-
-def generate_feedback(resume_text, resume_skills, missing, score):
-
-    feedback = []
-
-    text = resume_text.lower()
-
-    # Check whether projects are mentioned
-    if "project" not in text:
-
-        feedback.append(
-            "Add a Projects section to demonstrate your practical knowledge."
-        )
-
-    # Check whether experience is mentioned
-    if "experience" not in text:
-
-        feedback.append(
-            "Add relevant internship, work or practical experience if available."
-        )
-
-    # Check missing job skills
-    for skill in missing:
-
-        feedback.append(
-            f"Consider learning and demonstrating {skill} through a practical project."
-        )
-
-    # Check resume skills
-    if len(resume_skills) < 3:
-
-        feedback.append(
-            "Add relevant technical skills that you genuinely know."
-        )
-
-    # Check job match score
-    if score < 50:
-
-        feedback.append(
-            "Review the job requirements and improve the relevance of your resume."
-        )
-
-    elif score >= 80:
-
-        feedback.append(
-            "Your detected skills match many job requirements. Highlight them clearly."
-        )
-
-    # General suggestion
-    feedback.append(
-        "Use clear bullet points and include measurable achievements wherever possible."
-    )
-
-    return feedback
 
 
 # -------------------------
@@ -208,6 +148,7 @@ def generate_feedback(resume_text, resume_skills, missing, score):
 col1, col2 = st.columns(2)
 
 with col1:
+
     st.subheader("Upload Resume")
 
     uploaded_file = st.file_uploader(
@@ -216,6 +157,7 @@ with col1:
     )
 
 with col2:
+
     st.subheader("Job Description")
 
     job_description = st.text_area(
@@ -231,9 +173,11 @@ with col2:
 if st.button("Analyze My Resume", type="primary"):
 
     if uploaded_file is None:
+
         st.error("Please upload a PDF resume.")
 
     elif not job_description.strip():
+
         st.error("Please enter a job description.")
 
     else:
@@ -301,9 +245,12 @@ if st.button("Analyze My Resume", type="primary"):
                     st.markdown("### ✅ Matching Skills")
 
                     if matched:
+
                         for skill in matched:
                             st.success(skill)
+
                     else:
+
                         st.info("No matching skills found.")
 
                 with right:
@@ -311,9 +258,12 @@ if st.button("Analyze My Resume", type="primary"):
                     st.markdown("### 📚 Skills to Develop")
 
                     if missing:
+
                         for skill in missing:
                             st.warning(skill)
+
                     else:
+
                         st.success("All detected job skills matched!")
 
                 # Strengths
@@ -339,6 +289,7 @@ if st.button("Analyze My Resume", type="primary"):
                 if missing:
 
                     for skill in missing:
+
                         st.write(
                             f"• Consider learning or demonstrating {skill} through a project."
                         )
@@ -348,25 +299,6 @@ if st.button("Analyze My Resume", type="primary"):
                     st.write(
                         "Your resume contains all the skills detected in this job description. Review your projects and experience for relevance too."
                     )
-
-# -------------------------
-# PERSONALIZED FEEDBACK
-# -------------------------
-
-st.divider()
-
-st.header("🤖 Resume Improvement Feedback")
-
-feedback = generate_feedback(
-    resume_text,
-    resume_skills,
-    missing,
-    score
-)
-
-for suggestion in feedback:
-
-    st.info(suggestion)
 
                 # Download report
                 report = f"""
