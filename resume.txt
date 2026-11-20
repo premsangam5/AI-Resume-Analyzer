@@ -1,0 +1,4 @@
+Name: Prem Sangam
+Education: B.Tech Electronics and Communication Engineering
+Skills: Python, Java, SQL, Git
+CGPA: 6.6
