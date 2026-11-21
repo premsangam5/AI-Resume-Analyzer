@@ -1,44 +1,55 @@
-
 # AI Resume Analyzer
 
-A Python-based resume analyzer built using Streamlit.
+A web app that extracts details from PDF resumes and compares the candidate's skills with a job description.
 
-## About the Project
+🔗 **Live demo:** https://ai-resume-analyzer-c64arjt8rc8wf5nhxgnbuf.streamlit.app/
 
-AI Resume Analyzer is a web application that extracts information from PDF resumes and compares candidate skills with a given job description.
+## Screenshots
+
+### Upload
+![Upload](screenshots/upload.png)
+
+### Skills Analysis
+![Skills analysis](screenshots/skills%20analysis.png)
+
+### Analysed Dashboard
+![Analysed dashboard](screenshots/analysed%20dashboard.png)
+
+### Resume Strength Check
+![Check strength](screenshots/check%20strength.png)
+
+### Downloadable Report
+![Report](screenshots/report.png)
 
 ## Features
 
 - Upload PDF resumes
-- Extract candidate email and phone number
-- Identify skills from resumes
-- Compare resume skills with job requirements
-- Calculate skill matching percentage
-- Display matching and missing skills
+- Extract email and phone number
+- Identify skills from the resume (regex-based)
+- Compare resume skills with a job description
+- Calculate a skill match percentage
+- Show matching and missing skills
 - Download an analysis report
 
-## Technologies Used
+## Tech Stack
 
-- Python
-- Streamlit
-- PyMuPDF
-- Regular Expressions
+Python · Streamlit · PyMuPDF · Regular Expressions
 
-## How to Run
+## Run Locally
 
-1. Clone this repository.
-2. Install the required packages:
+```bash
+git clone https://github.com/premsangam5/AI-Resume-Analyzer.git
+cd AI-Resume-Analyzer
+pip install -r requirements.txt
+streamlit run app.py
+```
 
-   pip install -r requirements.txt
+## Future Improvements
 
-3. Start the application:
-
-   streamlit run app.py
-
-## Project Status
-
-Beginner-level project under development.
+- Support DOCX resumes
+- Improve matching with TF-IDF / NLP techniques
+- Suggest skills to add based on the job description
 
 ## Author
 
-Prem Sangam
+Prem Sangam — [GitHub](https://github.com/premsangam5) · [LinkedIn](https://linkedin.com/in/prem-sangam)
